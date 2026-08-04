@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "WebVulnScanner"
+description = "A browser-based web vulnerability assessment tool with a green terminal/hacking aesthetic. Lets security testers enter a target URL, run a full suite of scans (XSS, SQLi, LFI, CORS, DNS recon, port scan, SSL check, tech fingerprinting, and more), view live scan progress in a terminal feed, and download detailed findings reports. Built for authorized offensive security assessments."
+version = "1.0.0"
+id = "artifacts/vuln-scanner-ui"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21571
+
+[services.development]
+run = "pnpm --filter @workspace/vuln-scanner-ui run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vuln-scanner-ui", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/vuln-scanner-ui/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21571"
+BASE_PATH = "/"

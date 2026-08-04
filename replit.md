@@ -1,36 +1,47 @@
-# [Project name]
+# WebVulnScanner
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A browser-based web vulnerability assessment tool for authorized offensive security testing. Enter a target URL, run a full suite of scans, watch live terminal output, and download detailed findings reports.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- API server runs automatically via workflow: `artifacts/api-server: API Server`
+- Frontend runs automatically via workflow: `artifacts/vuln-scanner-ui: web`
+- API available at `/api` — proxied to port 8080 (Flask/Python)
+- Frontend at `/` — Vite React app (port assigned by workflow)
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- **Frontend:** React + Vite + Tailwind (artifacts/vuln-scanner-ui) — green terminal aesthetic
+- **Backend:** Python 3.11 + Flask (artifacts/api-server) — pure JSON API
+- **Scanner modules:** beautifulsoup4, requests, lxml, dnspython, python-docx
+- pnpm workspaces, Node.js 24, TypeScript 5.9 (for frontend)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/api-server/app.py` — Flask app, all API routes
+- `artifacts/api-server/core/checks/` — individual vuln check modules
+- `artifacts/api-server/core/dns_recon.py` — DNS reconnaissance
+- `artifacts/api-server/core/port_scanner.py` — TCP port scanner
+- `artifacts/api-server/core/ssl_check.py` — SSL/TLS inspection
+- `artifacts/api-server/core/tech_fingerprint.py` — tech detection
+- `artifacts/api-server/core/report_writer.py` — JSON/TXT/HTML/DOCX export
+- `artifacts/vuln-scanner-ui/src/` — React frontend (green terminal theme)
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Python Flask chosen as backend (user's original tool was Flask/Python)
+- No database — scan jobs live in-memory (fine for single-user local tool)
+- All API routes under `/api` prefix matching the reverse proxy path
+- Jobs run in background threads; frontend polls `/api/status/:id` every 1.2s
+- Reports written to `artifacts/api-server/reports/` on first download request
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+**12 vulnerability checks:** Security Headers, Server Info Disclosure, Directory Listing, Sensitive File Exposure, Open Redirect, LFI, XSS, SQL Injection, CORS Misconfiguration, SSRF, Command Injection, Clickjacking
+
+**4 recon modules:** DNS Enumeration (subdomains + records + zone transfer test), Port Scanner (20 common ports), SSL/TLS Inspector (cert expiry, weak protocols, self-signed), Technology Fingerprinting (CMS/framework/language detection)
+
+**Report exports:** JSON, TXT, HTML, DOCX (Word)
 
 ## User preferences
 
