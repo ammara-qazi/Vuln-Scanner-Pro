@@ -1,8 +1,23 @@
-# Vuln-Scanner-Pro 
-
 <p align="center">
-  <strong>A Modern Web Vulnerability Scanner for Security Testing & Reconnaissance</strong>
+  <img src="https://github.com/user-attachments/assets/1cc0270c-a135-4eac-862e-43de6d6ff015" width="50%">
 </p>
+
+  
+ ![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
+ ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
+ ![Flask](https://img.shields.io/badge/Backend-Flask-black?style=for-the-badge&logo=flask)
+ ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+ ![MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+
+> [!WARNING]
+>
+> **Vuln-Scanner-Pro is currently under development.**
+>
+> Some features may still be under development, and bugs or unexpected behavior may occur.
+>
+> If you encounter an issue, please open a GitHub Issue with steps to reproduce it.
+
 
   A browser-based web vulnerability assessment tool with a live terminal-style feed.Built with <b>React</b> and <b>Python</b>,  Enter a target URL, run a full suite of security checks, watch progress in real time, and download a detailed findings report.
 
@@ -123,7 +138,7 @@ pip install -r requirements.txt
 ```bash
 cd artifacts/api-server
 
-python app.py
+PORT=8080 python app.py
 ```
 
 ---
@@ -132,24 +147,42 @@ python app.py
 
 ```bash
 cd artifacts/api-server/vuln-scanner-ui
-pnpm --filter @workspace/vuln-scanner-ui run dev
-or
-pnpm dev
+PORT=5173 BASE_PATH=// pnpm run dev
 ```
 
 ---
 
 # Screenshots
 
-Add screenshots here after publishing.
+## Dashboard
 
-Example:
+<p align="center">
+<img src="docs/images/dashboard.png" width="900">
+</p>
 
-```
-docs/images/dashboard.png
-docs/images/results.png
-docs/images/report.png
-```
+---
+
+## Live Scan
+
+<p align="center">
+<img src="docs/images/terminal.png" width="900">
+</p>
+
+---
+
+## Scan Results
+
+<p align="center">
+<img src="docs/images/results.png" width="900">
+</p>
+
+---
+
+## Report
+
+<p align="center">
+<img src="docs/images/report.png" width="900">
+</p>
 
 ---
 
@@ -188,3 +221,5 @@ Please open an Issue before submitting major changes.
 Cybersecurity Student
 
 Ethical Hacking • Penetration Testing • Secure Software Development
+
+
