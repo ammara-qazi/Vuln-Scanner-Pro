@@ -131,6 +131,7 @@ python app.py
 ## Start the Frontend
 
 ```bash
+cd artifacts/api-server/vuln-scanner-ui
 pnpm --filter @workspace/vuln-scanner-ui run dev
 or
 pnpm dev
