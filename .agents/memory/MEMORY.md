@@ -1,2 +1,0 @@
-- [WebVulnScanner backend](webvulnscanner-backend.md) — Python Flask API at /api; workflow runs from absolute path /home/runner/workspace/artifacts/api-server
-- [WebVulnScanner architecture](webvulnscanner-arch.md) — scan jobs in-memory, Python 3.11, no DB, ports in-memory dict with threading
